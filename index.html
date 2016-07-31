@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style type="text/css">
+.nav-anchor {
+    /* border: 1px solid white; */
+    display: block;
+}
+#anchor0 {
+    height: 360px;
+}
+#anchor1 {
+    height: 360px;
+}
+#anchor2 {
+    height: 320px;
+}
+#anchor3 {
+    height: 1600px;
+}
+#fall-hook {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 20px;
+    height: 3000px;
+    background: -moz-linear-gradient(top, #FF0000, #FF9900, #FFFF00, #00FF00, #0099FF, #0000FF, #FF00FF);
+    background: -webkit-linear-gradient(top, #FF0000, #FF9900, #FFFF00, #00FF00, #0099FF, #0000FF, #FF00FF);
+    background: -ms-linear-gradient(top, #FF0000, #FF9900, #FFFF00, #00FF00, #0099FF, #0000FF, #FF00FF);
+    background: -o-linear-gradient(top, #FF0000, #FF9900, #FFFF00, #00FF00, #0099FF, #0000FF, #FF00FF);
+}
+#circle1 {
+    left: 50px;
+    width: 200px;
+    height: 400px;
+    top: -400px;
+}
+#circle2 {
+    left: 400px;
+    width: 100px;
+    height: 200px;
+    top: -200px;
+}
+#circle3 {
+    left: 700px;
+    width: 50px;
+    height: 100px;
+    top: -200px;
+}
+.blur {
+    filter: blur(1px);
+    -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: url("data:image/svg+xml;utf8,<svg height=\"0\" xmlns=\"http://www.w3.org/2000/svg\"><filter id=\"svgBlur\" name=\"svgBlur\" x=\"-5%\" y=\"-5%\" width=\"110%\" height=\"110%\"><feGaussianBlur in=\"SourceGraphic\" stdDeviation=\"5\"/></filter></svg>#svgBlur");
+    filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius='5');
+}
+.circle {
+    display: block;
+    position: fixed;
+}
+
+#side-nav {
+    position: fixed;
+    z-index: 1000;
+    top: 50%;
+    right: 30px;
+    width: 20px;
+    margin-top: -77px;
+    padding: 0;
+}
+#side-nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#side-nav ul li {
+    margin: 12px 0;
+}
+#side-nav ul li a {
+    display: block;
+    width: 12px;
+    text-indent: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    opacity: 0.5;
+    -webkit-transition: all linear 0.25s;
+    -moz-transition: all linear 0.25s;
+    -o-transition: all linear 0.25s;
+    -ms-transition: all linear 0.25s;
+    transition: all linear 0.25s;
+}
+#side-nav ul li a:hover, #side-nav ul li a:focus, #side-nav ul li a.curr {
+    opacity: 1;
+}
+#side-nav ul li a.nav {
+    height: 12px;
+    padding: 0;
+    background: black;
+    -moz-border-radius: 7px;
+    -webkit-border-radius: 7px;
+    border-radius: 7px;
+}
+#scroll-tip {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 45px;
+    text-align: center;
+    margin: auto;
+    color: black;
+    opacity: 0.5;
+}
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <div id="anchor0" class="nav-anchor"></div>
+    <div id="anchor1" class="nav-anchor"></div>
+    <div id="anchor2" class="nav-anchor"></div>
+    <div id="anchor3" class="nav-anchor"></div>
+    <div id="fall-hook"></div>
+
+    <div class="content">
+        <div id="circle1" class="circle blur">
+            <img src="image/circle1.gif">
+        </div>
+        <div id="circle2" class="circle">
+            <img src="image/circle2.gif">
+        </div>
+        <div id="circle3" class="circle blur">
+            <img src="image/circle3.gif">
+        </div>
+    </div>
+
+    <nav id="side-nav" role="navigation">
+        <ul>
+            <li><a class="nav" href="#anchor1" title="far">far</a>
+            </li>
+            <li><a class="nav" href="#anchor2" title="focus">focus</a>
+            </li>
+            <li><a class="nav" href="#anchor3" title="near">near</a>
+            </li>
+        </ul>
+    </nav>
+    <span id="scroll-tip">向下捲動<br/>︾</span>
+
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://firefox.club.tw/static/js/libs/jquery.scrollTo.js"></script>
+<script src="https://firefox.club.tw/static/js/libs/jquery.localScroll.js"></script>
+<script src="https://firefox.club.tw/static/js/libs/jquery.waypoints.min.js"></script>
+<script src="https://firefox.club.tw/static/js/libs/jquery.waypoints-sticky.min.js"></script>
+<script src="https://firefox.club.tw/static/js/libs/jquery.pageslide.min.js"></script>
+<script src="https://firefox.club.tw/static/js/libs/tweenmax.1.9.7.min.js"></script>
+<script src="https://firefox.club.tw/static/js/libs/superscrollorama-1.0.1.js"></script>
+<script src="https://firefox.club.tw/static/js/libs/jquery.plusslider.js"></script>
+<script src="https://firefox.club.tw/static/js/libs/jquery.color.js"></script>
+<script src="https://firefox.club.tw/static/js/libs/script.js"></script>
+
+<script type="text/javascript">
+    (function () {
+        var controller = $.superscrollorama({
+            playoutAnimations: false
+        });
+        var fallHook = $('#fall-hook');
+        var circle1Fall = TweenMax.to($('#circle1'), 1, {
+            css: {
+                top: '450px'
+            }
+        });
+        var circle2Fall = TweenMax.to($('#circle2'), 1, {
+            css: {
+                top: '450px'
+            }
+        });
+        var circle3Fall = TweenMax.to($('#circle3'), 1, {
+            css: {
+                top: '450px'
+            }
+        });
+        controller.addTween(fallHook, circle3Fall, 3000, 0);
+        controller.addTween(fallHook, circle2Fall, 2100, 500);
+        controller.addTween(fallHook, circle1Fall, 800, 1000);
+
+        var autoScrolling = false;
+            $('body').keyup(function (e) {
+                if (13 == e.keyCode) {
+                if (!autoScrolling) {
+                    $.scrollTo($(document).height(), 3000);
+                    autoScrolling = true;
+                } else {
+                    $.scrollTo.window().stop(true);
+                    autoScrolling = false;
+                }
+            }
+        });
+
+    $.localScroll({
+        target: 'body', // could be a selector or a jQuery object too.
+        queue: true,
+        duration: 500,
+        hash: true
+    });
+
+    var $side_nav = $('#side-nav');
+
+    var side_nav_targets = [];
+    // store possible nav targets in array for easier searching
+    $side_nav.find('a').each(function (index, anchor) {
+        side_nav_targets.push(anchor.getAttribute('href'));
+    });
+    $('.nav-anchor').waypoint(function (direction) {
+        $side_nav.find('a').removeClass('curr');
+
+        if (direction === 'down') {
+            $side_nav.find('a[href="#' + $(this).attr('id') + '"]').addClass('curr');
+        } else {
+            // find index in nav array of currently scrolled to target
+            var cur_target_index = $.inArray('#' + $(this).attr('id'), side_nav_targets);
+
+            // if there's a previous target, update the active navs
+            if (cur_target_index > 0) {
+                $side_nav.find('a[href="' + side_nav_targets[cur_target_index - 1] + '"]').addClass('curr');
+            }
+        }
+    });
+
+})()
+
+</script>
+</body>
+</html>
